@@ -33,6 +33,7 @@
       max-width: 1200px;
       margin: 0 auto;
       padding: 0 20px;
+      position: relative;
     }
 
     .logo {
@@ -76,10 +77,49 @@
 
     .menu-toggle {
       display: none;
-      font-size: 1.5rem;
+      font-size: 1.8rem;
       cursor: pointer;
-      color: #f39c12;
+      color: #fff;
     }
+
+    @media (max-width: 768px) {
+  nav ul {
+    display: none;
+    flex-direction: column;
+    background-color: #000;
+    position: absolute;
+    top: 60px; /* slightly higher */
+    right: 0;
+    width: 50vw; /* reduced width */
+    border-radius: 10px 0 0 10px;
+    padding: 10px; /* reduced padding */
+    z-index: 999;
+  }
+
+  nav ul li {
+    margin: 8px 0;
+    text-align: left;
+    padding-left: 10px;
+  }
+
+  nav ul li a {
+    display: block;
+    font-size: 0.95rem; /* slightly smaller font */
+    padding: 5px 0;
+  }
+
+  nav ul.active {
+    display: flex;
+  }
+
+  .menu-toggle {
+    display: block;
+  }
+}
+
+
+
+
 
     .hero {
       background: url('hero-image.jpg') no-repeat center center/cover;
@@ -255,56 +295,18 @@
     footer a:hover {
       color: #e67e22;
     }
-
-    @media (max-width: 768px) {
-      .menu-toggle {
-        display: block;
-      }
-
-      nav ul {
-        display: none;
-        flex-direction: column;
-        background-color: #000;
-        position: absolute;
-        top: 70px;
-        right: 20px;
-        width: 240px;
-        border-radius: 10px;
-        padding: 15px;
-      }
-
-      nav ul li {
-        margin: 15px 0;
-      }
-
-      nav ul li a {
-        font-size: 1.2rem;
-        padding: 12px 15px;
-        display: block;
-      }
-
-      nav ul.show {
-        display: flex;
-      }
-    }
   </style>
-  <script>
-    function toggleMenu() {
-      document.querySelector('nav ul').classList.toggle('show');
-    }
-  </script>
 </head>
 <body>
 
+<!-- Navigation -->
 <header>
   <div class="navbar">
     <div class="logo">
       <img src="logo.png" alt="Arie SA Logo" />
       <h1>Arie SA</h1>
     </div>
-    <div class="menu-toggle" onclick="toggleMenu()">
-      <i class="fas fa-bars"></i>
-    </div>
+    <div class="menu-toggle"><i class="fas fa-bars"></i></div>
     <nav>
       <ul>
         <li><a href="#home"><i class="fas fa-home"></i> Home</a></li>
@@ -318,6 +320,7 @@
   </div>
 </header>
 
+<!-- Hero -->
 <section class="hero" id="home">
   <div class="hero-content">
     <h2>ALWAYS ENJOY NEW MUSIC</h2>
@@ -326,7 +329,100 @@
   </div>
 </section>
 
-<!-- Keep the rest of your sections as-is -->
+<!-- About -->
+<section id="about" class="about">
+  <div class="container">
+    <div class="about-text">
+      <h2>About Me</h2>
+      <p>My name is Kabelo Selomo, known by my stage name Arie SA. I’m a 24-year-old electronic music producer from Lesotho, creating soulful and deep house sounds that reflect my life’s emotions and energy.</p>
+      <p>I’m in a loving relationship with my girlfriend, Pontsho Motsoasele, who is a huge inspiration in my journey. I’m also a proud brother to Karabo Selomo and Rethabile Selomo, who’ve been with me every step of the way.</p>
+    </div>
+    <div class="about-image">
+      <img src="ARIES1.jpg" alt="Kabelo Selomo (Arie SA)">
+    </div>
+  </div>
+</section>
+
+<!-- Music -->
+<section class="music" id="music">
+  <div class="music-player">
+    <h3>Latest Release</h3>
+    <audio controls>
+      <source src="Lost on Mars (Healing mix).mp3" type="audio/mp3" />
+      Your browser does not support the audio element.
+    </audio>
+    <br /><br />
+    <a href="Lost on Mars (Healing mix).mp3" download class="cta-button">Download Song</a>
+  </div>
+
+  <div class="albums">
+    <h3>Discography</h3>
+    <div class="album-grid">
+      <div class="album">
+        <img src="album1.jpg" alt="Album 1" />
+        <p>WISDOM</p>
+      </div>
+      <div class="album">
+        <img src="album2.jpg" alt="Album 2" />
+        <p>PEACE VOL-1</p>
+      </div>
+      <div class="album">
+        <img src="album3.png" alt="Album 3" />
+        <p>HOPE VOL-1</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Gallery -->
+<section class="gallery" id="gallery">
+  <h2>Pictures Gallery</h2>
+  <div class="gallery-grid">
+    <div class="gallery-item"><img src="picture1.jpg" alt="Pic 1"/></div>
+    <div class="gallery-item"><img src="picture2.jpg" alt="Pic 2"/></div>
+    <div class="gallery-item"><img src="picture3.jpg" alt="Pic 3"/></div>
+    <div class="gallery-item"><img src="picture4.jpg" alt="Pic 4"/></div>
+  </div>
+</section>
+
+<!-- Events -->
+<section class="events" id="events">
+  <h2>Upcoming Events</h2>
+  <ul>
+    <li>No upcoming events</li>
+  </ul>
+</section>
+
+<!-- Contact -->
+<section class="contact" id="contact">
+  <h2>Contact Me</h2>
+  <form>
+    <input type="text" placeholder="Your Name" required />
+    <input type="email" placeholder="Your Email" required />
+    <textarea rows="5" placeholder="Your Message" required></textarea>
+    <button type="submit">Send Message</button>
+  </form>
+</section>
+
+<!-- Footer -->
+<footer>
+  <p>&copy; 2025 Arie SA | All Rights Reserved</p>
+  <div>
+    <a href="https://youtube.com/@ariesa-o5k?si=I_oX85kokLDxHfPT">YouTube</a>
+    <a href="https://www.facebook.com/savvyary">Facebook</a>
+    <a href="https://vm.tiktok.com/ZMB7uoMu7/">TikTok</a>
+  </div>
+</footer>
+
+<!-- Mobile Menu Toggle Script -->
+<script>
+  const toggle = document.querySelector('.menu-toggle');
+  const navLinks = document.querySelector('nav ul');
+
+  toggle.addEventListener('click', () => {
+    navLinks.classList.toggle('active');
+  });
+</script>
 
 </body>
 </html>
