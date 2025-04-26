@@ -33,6 +33,7 @@
       max-width: 1200px;
       margin: 0 auto;
       padding: 0 20px;
+      position: relative;
     }
 
     .logo {
@@ -72,6 +73,35 @@
       background-color: #f39c12;
       color: #222;
       border-radius: 5px;
+    }
+
+    .menu-toggle {
+      display: none;
+      font-size: 1.8rem;
+      cursor: pointer;
+      color: #fff;
+    }
+
+    @media (max-width: 768px) {
+      nav ul {
+        display: none;
+        flex-direction: column;
+        background-color: #000;
+        position: absolute;
+        top: 70px;
+        right: 20px;
+        width: 200px;
+        border-radius: 10px;
+        padding: 10px;
+      }
+
+      nav ul.active {
+        display: flex;
+      }
+
+      .menu-toggle {
+        display: block;
+      }
     }
 
     .hero {
@@ -259,6 +289,7 @@
       <img src="logo.png" alt="Arie SA Logo" />
       <h1>Arie SA</h1>
     </div>
+    <div class="menu-toggle"><i class="fas fa-bars"></i></div>
     <nav>
       <ul>
         <li><a href="#home"><i class="fas fa-home"></i> Home</a></li>
@@ -277,29 +308,28 @@
   <div class="hero-content">
     <h2>ALWAYS ENJOY NEW MUSIC</h2>
     <p>Feel the rhythm. Experience the soul.</p>
-    <p></p>
     <a href="#music" class="cta-button">Listen Now</a>
   </div>
 </section>
 
 <!-- About -->
 <section id="about" class="about">
-    <div class="container">
-        <div class="about-text">
-            <h2>About Me</h2>
-            <p>My name is Kabelo Selomo, known by my stage name Arie SA. I’m a 24-year-old electronic music producer from Lesotho, creating soulful and deep house sounds that reflect my life’s emotions and energy.</p>
-            <p>I’m in a loving relationship with my girlfriend, Pontsho Motsoasele, who is a huge inspiration in my journey. I’m also a proud brother to Karabo Selomo and Rethabile Selomo, who’ve been with me every step of the way.</p>
-        </div>
-        <div class="about-image">
-            <img src="ARIES1.jpg" alt="Kabelo Selomo (Arie SA)">
-        </div>
+  <div class="container">
+    <div class="about-text">
+      <h2>About Me</h2>
+      <p>My name is Kabelo Selomo, known by my stage name Arie SA. I’m a 24-year-old electronic music producer from Lesotho, creating soulful and deep house sounds that reflect my life’s emotions and energy.</p>
+      <p>I’m in a loving relationship with my girlfriend, Pontsho Motsoasele, who is a huge inspiration in my journey. I’m also a proud brother to Karabo Selomo and Rethabile Selomo, who’ve been with me every step of the way.</p>
     </div>
+    <div class="about-image">
+      <img src="ARIES1.jpg" alt="Kabelo Selomo (Arie SA)">
+    </div>
+  </div>
 </section>
 
 <!-- Music -->
 <section class="music" id="music">
   <div class="music-player">
-    <h3> Latest Release</h3>
+    <h3>Latest Release</h3>
     <audio controls>
       <source src="Lost on Mars (Healing mix).mp3" type="audio/mp3" />
       Your browser does not support the audio element.
@@ -366,6 +396,16 @@
     <a href="https://vm.tiktok.com/ZMB7uoMu7/">TikTok</a>
   </div>
 </footer>
+
+<!-- Mobile Menu Toggle Script -->
+<script>
+  const toggle = document.querySelector('.menu-toggle');
+  const navLinks = document.querySelector('nav ul');
+
+  toggle.addEventListener('click', () => {
+    navLinks.classList.toggle('active');
+  });
+</script>
 
 </body>
 </html>
