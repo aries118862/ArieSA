@@ -1,138 +1,371 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ARIE SA</title>
-    <style>
-        /* Global reset */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Arie SA | Music</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-        body {
-            background-color: rgb(215, 221, 230);
-        }
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to right, #000, #1e3c72, #2a5298);
+      color: #fff;
+    }
 
-        /* Navigation */
-        nav {
-            background-color: rgba(0, 0, 0, 0.628);
-            color: white;
-            padding: 10px 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-        }
+    header {
+      position: sticky;
+      top: 0;
+      background-color: #000;
+      padding: 15px 0;
+      z-index: 1000;
+    }
 
-        .WELCOME {
-            color: white;
-            background-color: transparent;
-            border: none;
-            font-weight: bold;
-            font-size: 24px;
-        }
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
 
-        /* Style the buttons */
-        button {
-            color: rgb(255, 255, 255);
-            border-color: rgb(233, 234, 221);
-            background-color: rgb(39, 113, 216);
-            height: 40px;
-            margin: 5px;
-            border-radius: 18px;
-            padding: 10px 20px;
-            cursor: pointer;
-        }
+    .logo {
+      display: flex;
+      align-items: center;
+    }
 
-        button:hover {
-            background-color: rgb(200, 28, 74);
-        }
+    .logo img {
+      width: 50px;
+      height: 50px;
+      margin-right: 10px;
+    }
 
-        .contact {
-            background-color: transparent;
-            height: 40px;
-            width: 120px;
-            border: none;
-            font-weight: bold;
-        }
+    .logo h1 {
+      color: #f39c12;
+      font-size: 2rem;
+    }
 
-        /* Box with background image */
-        .box {
-            height: 720px;
-            width: 100%;
-            max-width: 1080px;
-            background-image: url(/mnt/data/TEST.png); /* Apply the image as background */
-            background-size: cover;
-            background-position: center;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-            position: relative; /* Allows absolute positioning of buttons */
-            margin: 20px auto;
-            background-image: url(background.jpg);
-        }
+    nav ul {
+      display: flex;
+      list-style: none;
+    }
 
-        /* Styling text paragraphs */
-        .box h1, .box p {
-            color: white;
-            text-align: center;
-            font-size: 36px;
-            font-weight: bold;
-            margin-bottom: 20px;
-        }
+    nav ul li {
+      margin: 0 15px;
+    }
 
-        .box p {
-            font-size: 18px;
-            font-weight: normal;
-            margin-bottom: 30px;
-        }
+    nav ul li a {
+      color: #fff;
+      text-decoration: none;
+      font-size: 1.1rem;
+      padding: 5px 10px;
+      transition: 0.3s;
+    }
 
-        /* Buttons inside the box */
-        .GETSTARTED{
-            color: white;
-            background-color: #D21F5B; /* Custom button color */
-            height: 60px;
-            border-radius: 18px;
-            width: 350px;
-            font-weight: bold;
-            font-size: 24pt;
-            margin: 10px auto;
-            padding: 12px 24px;
-            border-color: transparent;
-            text-align: center;
-            margin-top: 40px auto;
-        }
-        /* Responsive Styling */
-        @media (max-width: 768px) {
-            nav {
-                flex-direction: column;
-                text-align: center;
-            }
+    nav ul li a:hover {
+      background-color: #f39c12;
+      color: #222;
+      border-radius: 5px;
+    }
 
-            .box {
-                width: 90%;
-                height: auto;
-            }
-        }
-    </style>
+    .hero {
+      background: url('hero-image.jpg') no-repeat center center/cover;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+
+    .hero h2 {
+      font-size: 3rem;
+    }
+
+    .hero p {
+      font-size: 1.3rem;
+      margin: 15px 0;
+      color: #f39c12;
+    }
+
+    .cta-button {
+      background-color: #f39c12;
+      color: #fff;
+      padding: 12px 24px;
+      border-radius: 5px;
+      text-decoration: none;
+      font-size: 1rem;
+      transition: background-color 0.3s;
+    }
+
+    .cta-button:hover {
+      background-color: #e67e22;
+    }
+
+    .about,
+    .music,
+    .gallery,
+    .events,
+    .contact {
+      padding: 60px 20px;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .about-text {
+      flex: 1;
+      min-width: 300px;
+      margin-right: 20px;
+    }
+
+    .about-image img {
+      width: 300px;
+      border-radius: 10px;
+    }
+
+    .music h2,
+    .gallery h2,
+    .events h2,
+    .contact h2 {
+      text-align: center;
+      margin-bottom: 30px;
+      font-size: 2.5rem;
+    }
+
+    .music-player {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .music-player img {
+      width: 300px;
+      border-radius: 10px;
+      margin-bottom: 15px;
+    }
+
+    .music-player audio {
+      width: 80%;
+      border-radius: 10px;
+    }
+
+    .albums {
+      text-align: center;
+    }
+
+    .album-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+      padding: 20px 0;
+    }
+
+    .album img {
+      width: 100%;
+      border-radius: 10px;
+      transition: transform 0.3s;
+    }
+
+    .album img:hover {
+      transform: scale(1.05);
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+    }
+
+    .gallery-item img {
+      width: 100%;
+      border-radius: 10px;
+      transition: transform 0.3s;
+    }
+
+    .gallery-item img:hover {
+      transform: scale(1.05);
+    }
+
+    .events ul {
+      list-style: none;
+      text-align: center;
+      font-size: 1.2rem;
+    }
+
+    .contact form {
+      max-width: 600px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .contact input,
+    .contact textarea {
+      margin: 10px 0;
+      padding: 12px;
+      border: 1px solid #f39c12;
+      border-radius: 5px;
+      background-color: #444;
+      color: #fff;
+    }
+
+    .contact button {
+      background-color: #f39c12;
+      color: #fff;
+      padding: 12px;
+      border: none;
+      border-radius: 5px;
+      font-size: 1.1rem;
+    }
+
+    .contact button:hover {
+      background-color: #e67e22;
+    }
+
+    footer {
+      background-color: #111;
+      padding: 20px;
+      text-align: center;
+    }
+
+    footer a {
+      color: #f39c12;
+      margin: 0 10px;
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      color: #e67e22;
+    }
+  </style>
 </head>
 <body>
-    <nav>
-        <button class="WELCOME">ARIE SA</button>
-        <button>Home</button>
-        <button>Music</button>
-        <button>Videos</button>
-        <button>Photos</button>
-        <button class="contact">Contact us</button>
-        <button class="contact">About us</button>
-    </nav>
-    <div class="box">
+
+<!-- Navigation -->
+<header>
+  <div class="navbar">
+    <div class="logo">
+      <img src="logo.png" alt="Arie SA Logo" />
+      <h1>Arie SA</h1>
     </div>
+    <nav>
+      <ul>
+        <li><a href="#home"><i class="fas fa-home"></i> Home</a></li>
+        <li><a href="#about"><i class="fas fa-info-circle"></i> About</a></li>
+        <li><a href="#music"><i class="fas fa-music"></i> Music</a></li>
+        <li><a href="#gallery"><i class="fas fa-images"></i> Gallery</a></li>
+        <li><a href="#events"><i class="fas fa-calendar-alt"></i> Events</a></li>
+        <li><a href="#contact"><i class="fas fa-envelope"></i> Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<!-- Hero -->
+<section class="hero" id="home">
+  <div class="hero-content">
+    <h2>ALWAYS ENJOY NEW MUSIC</h2>
+    <p>Feel the rhythm. Experience the soul.</p>
+    <p></p>
+    <a href="#music" class="cta-button">Listen Now</a>
+  </div>
+</section>
+
+<!-- About -->
+<section id="about" class="about">
+    <div class="container">
+        <div class="about-text">
+            <h2>About Me</h2>
+            <p>My name is Kabelo Selomo, known by my stage name Arie SA. I’m a 24-year-old electronic music producer from Lesotho, creating soulful and deep house sounds that reflect my life’s emotions and energy.</p>
+            <p>I’m in a loving relationship with my girlfriend, Pontsho Motsoasele, who is a huge inspiration in my journey. I’m also a proud brother to Karabo Selomo and Rethabile Selomo, who’ve been with me every step of the way.</p>
+        </div>
+        <div class="about-image">
+            <img src="ARIES1.jpg" alt="Kabelo Selomo (Arie SA)">
+        </div>
+    </div>
+</section>
+
+<!-- Music -->
+<section class="music" id="music">
+  <div class="music-player">
+    <h3> Latest Release</h3>
+    <audio controls>
+      <source src="Lost on Mars (Healing mix).mp3" type="audio/mp3" />
+      Your browser does not support the audio element.
+    </audio>
+    <br /><br />
+    <a href="Lost on Mars (Healing mix).mp3" download class="cta-button">Download Song</a>
+  </div>
+
+  <div class="albums">
+    <h3>Discography</h3>
+    <div class="album-grid">
+      <div class="album">
+        <img src="album1.jpg" alt="Album 1" />
+        <p>WISDOM</p>
+      </div>
+      <div class="album">
+        <img src="album2.jpg" alt="Album 2" />
+        <p>PEACE VOL-1</p>
+      </div>
+      <div class="album">
+        <img src="album3.png" alt="Album 3" />
+        <p>HOPE VOL-1</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Gallery -->
+<section class="gallery" id="gallery">
+  <h2>Pictures Gallery</h2>
+  <div class="gallery-grid">
+    <div class="gallery-item"><img src="picture1.jpg" alt="Pic 1"/></div>
+    <div class="gallery-item"><img src="picture2.jpg" alt="Pic 2"/></div>
+    <div class="gallery-item"><img src="picture3.jpg" alt="Pic 3"/></div>
+    <div class="gallery-item"><img src="picture4.jpg" alt="Pic 4"/></div>
+  </div>
+</section>
+
+<!-- Events -->
+<section class="events" id="events">
+  <h2>Upcoming Events</h2>
+  <ul>
+    <li>No upcoming events</li>
+  </ul>
+</section>
+
+<!-- Contact -->
+<section class="contact" id="contact">
+  <h2>Contact Me</h2>
+  <form>
+    <input type="text" placeholder="Your Name" required />
+    <input type="email" placeholder="Your Email" required />
+    <textarea rows="5" placeholder="Your Message" required></textarea>
+    <button type="submit">Send Message</button>
+  </form>
+</section>
+
+<!-- Footer -->
+<footer>
+  <p>&copy; 2025 Arie SA | All Rights Reserved</p>
+  <div>
+    <a href="https://youtube.com/@ariesa-o5k?si=I_oX85kokLDxHfPT">YouTube</a>
+    <a href="https://www.facebook.com/savvyary">Facebook</a>
+    <a href="https://vm.tiktok.com/ZMB7uoMu7/">TikTok</a>
+  </div>
+</footer>
+
 </body>
 </html>
-
