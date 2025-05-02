@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Arie SA | Music</title>
+  <title>Arie Savvy</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
   <style>
     * {
@@ -83,43 +83,39 @@
     }
 
     @media (max-width: 768px) {
-  nav ul {
-    display: none;
-    flex-direction: column;
-    background-color: #000;
-    position: absolute;
-    top: 60px; /* slightly higher */
-    right: 0;
-    width: 50vw; /* reduced width */
-    border-radius: 10px 0 0 10px;
-    padding: 10px; /* reduced padding */
-    z-index: 999;
-  }
+      nav ul {
+        display: none;
+        flex-direction: column;
+        background-color: #000;
+        position: absolute;
+        top: 60px;
+        right: 0;
+        width: 50vw;
+        border-radius: 10px 0 0 10px;
+        padding: 10px;
+        z-index: 999;
+      }
 
-  nav ul li {
-    margin: 8px 0;
-    text-align: left;
-    padding-left: 10px;
-  }
+      nav ul li {
+        margin: 8px 0;
+        text-align: left;
+        padding-left: 10px;
+      }
 
-  nav ul li a {
-    display: block;
-    font-size: 0.95rem; /* slightly smaller font */
-    padding: 5px 0;
-  }
+      nav ul li a {
+        display: block;
+        font-size: 0.95rem;
+        padding: 5px 0;
+      }
 
-  nav ul.active {
-    display: flex;
-  }
+      nav ul.active {
+        display: flex;
+      }
 
-  .menu-toggle {
-    display: block;
-  }
-}
-
-
-
-
+      .menu-toggle {
+        display: block;
+      }
+    }
 
     .hero {
       background: url('hero-image.jpg') no-repeat center center/cover;
@@ -221,11 +217,6 @@
     .album img {
       width: 100%;
       border-radius: 10px;
-      transition: transform 0.3s;
-    }
-
-    .album img:hover {
-      transform: scale(1.05);
     }
 
     .gallery-grid {
@@ -238,10 +229,12 @@
       width: 100%;
       border-radius: 10px;
       transition: transform 0.3s;
+      filter: grayscale(100%);
     }
 
     .gallery-item img:hover {
       transform: scale(1.05);
+      filter: grayscale(0%);
     }
 
     .events ul {
@@ -304,7 +297,7 @@
   <div class="navbar">
     <div class="logo">
       <img src="logo.png" alt="Arie SA Logo" />
-      <h1>Arie SA</h1>
+      <h1>Arie Savvy</h1>
     </div>
     <div class="menu-toggle"><i class="fas fa-bars"></i></div>
     <nav>
@@ -334,7 +327,7 @@
   <div class="container">
     <div class="about-text">
       <h2>About Me</h2>
-      <p>My name is Kabelo Selomo, known by my stage name Arie SA. I’m a 24-year-old electronic music producer from Lesotho, creating soulful and deep house sounds that reflect my life’s emotions and energy.</p>
+      <p>My name is Kabelo Selomo, known by my stage name Arie Savvy. I’m a 24-year-old electronic music producer from Lesotho, creating soulful and deep house sounds that reflect my life’s emotions and energy.</p>
       <p>I’m in a loving relationship with my girlfriend, Pontsho Motsoasele, who is a huge inspiration in my journey. I’m also a proud brother to Karabo Selomo and Rethabile Selomo, who’ve been with me every step of the way.</p>
     </div>
     <div class="about-image">
@@ -399,30 +392,23 @@
   <form>
     <input type="text" placeholder="Your Name" required />
     <input type="email" placeholder="Your Email" required />
-    <textarea rows="5" placeholder="Your Message" required></textarea>
+    <textarea placeholder="Your Message" required></textarea>
     <button type="submit">Send Message</button>
   </form>
 </section>
 
 <!-- Footer -->
 <footer>
-  <p>&copy; 2025 Arie SA | All Rights Reserved</p>
-  <div>
-    <a href="https://youtube.com/@ariesa-o5k?si=I_oX85kokLDxHfPT">YouTube</a>
-    <a href="https://www.facebook.com/savvyary">Facebook</a>
-    <a href="https://vm.tiktok.com/ZMB7uoMu7/">TikTok</a>
-  </div>
+  <p>&copy; 2025 Arie Savvy. All rights reserved.</p>
 </footer>
 
-<!-- Mobile Menu Toggle Script -->
 <script>
-  const toggle = document.querySelector('.menu-toggle');
-  const navLinks = document.querySelector('nav ul');
-
-  toggle.addEventListener('click', () => {
-    navLinks.classList.toggle('active');
+  const menuToggle = document.querySelector('.menu-toggle');
+  const navMenu = document.querySelector('nav ul');
+  menuToggle.addEventListener('click', () => {
+    navMenu.classList.toggle('active');
   });
 </script>
 
 </body>
-</html>
+</html> 
