@@ -2,103 +2,238 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Website Under Upgrade</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Arie Savvy - Soulful House Music</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
   <style>
+    /* Reset & base */
+    * { box-sizing: border-box; }
     body {
       margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
-      color: white;
-      font-family: 'Segoe UI', sans-serif;
+      color: #fff;
+      overflow-x: hidden;
+      line-height: 1.6;
+    }
+    a { color: inherit; text-decoration: none; }
+    a:focus, a:hover { outline: none; color: #ffc107; }
+
+    /* Header */
+    header { text-align: center; padding: 80px 20px 40px; animation: fadeInDown 1s ease forwards; }
+    header h1 { font-size: 3.5rem; margin: 0; letter-spacing: 4px; text-transform: uppercase; font-weight: 700; }
+    header p { margin-top: 12px; font-size: 1.3rem; font-weight: 400; color: #ccc; letter-spacing: 1.5px; }
+
+    /* Navigation */
+    nav {
       display: flex;
       justify-content: center;
-      align-items: center;
-      height: 100vh;
-      overflow: hidden;
-      text-align: center;
-      flex-direction: column;
+      background-color: rgba(255, 255, 255, 0.07);
+      padding: 12px 0;
+      position: sticky;
+      top: 0;
+      backdrop-filter: blur(12px);
+      z-index: 1000;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.3);
     }
-    h1 {
-      font-size: 3em;
-      margin-bottom: 10px;
-      animation: fadeInDown 1s ease forwards;
+    nav a {
+      margin: 0 20px;
+      font-weight: 600;
+      font-size: 1.1rem;
+      transition: color 0.3s ease;
+      position: relative;
+      padding: 4px 0;
     }
-    p {
-      font-size: 1.2em;
-      color: #ccc;
-      margin-bottom: 30px;
+    nav a::after {
+      content: '';
+      position: absolute;
+      bottom: -6px;
+      left: 0;
+      width: 0%;
+      height: 2px;
+      background: #ffc107;
+      transition: width 0.3s ease;
+    }
+    nav a:hover::after, nav a:focus::after { width: 100%; }
+    nav a:hover, nav a:focus { color: #ffc107; }
+
+    /* Section */
+    section {
+      max-width: 960px;
+      background-color: rgba(255, 255, 255, 0.07);
+      margin: 40px auto 60px;
+      padding: 40px 30px;
+      border-radius: 18px;
+      backdrop-filter: blur(15px);
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
       animation: fadeInUp 1.2s ease forwards;
     }
-    .system-update {
+    h2 {
+      font-size: 2.4rem;
+      margin-bottom: 24px;
+      color: #ffc107;
+      border-bottom: 3px solid #ffc107;
+      padding-bottom: 10px;
+      font-weight: 700;
+    }
+    p { font-size: 1.15rem; margin-bottom: 1.2em; color: #eee; }
+
+    /* Dot animation */
+    .dot-animation { display: flex; justify-content: center; margin-top: 25px; }
+    .dot { width: 14px; height: 14px; border-radius: 50%; background-color: #ffc107; margin: 0 6px; animation: blink 1.5s infinite alternate; }
+    .dot:nth-child(2) { animation-delay: 0.3s; }
+    .dot:nth-child(3) { animation-delay: 0.6s; }
+
+    /* Music Gallery */
+    .music-gallery {
       display: flex;
-      gap: 10px;
-      margin-bottom: 30px;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 30px;
+      margin-top: 20px;
     }
-    .dot {
-      width: 14px;
-      height: 14px;
-      border-radius: 50%;
-      background-color: #ffc107;
-      animation: blink 1.5s infinite alternate;
+    .music-gallery a {
+      display: block;
+      width: 220px;
+      height: 220px;
+      overflow: hidden;
+      border-radius: 18px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
     }
-    .dot:nth-child(2) {
-      animation-delay: 0.3s;
+    .music-gallery a img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
     }
-    .dot:nth-child(3) {
-      animation-delay: 0.6s;
+    .music-gallery a:hover img, .music-gallery a:focus img {
+      transform: scale(1.08);
+      box-shadow: 0 12px 30px rgba(255, 193, 7, 0.8);
     }
-    @keyframes blink {
-      0% { opacity: 0.2; transform: scale(0.9); }
-      100% { opacity: 1; transform: scale(1.2); }
+
+    /* Gallery */
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 25px;
     }
-    @keyframes fadeInDown {
-      from { transform: translateY(-20px); opacity: 0; }
-      to { transform: translateY(0); opacity: 1; }
+    .gallery img {
+      width: 100%;
+      height: auto;
+      border-radius: 14px;
+      object-fit: cover;
+      box-shadow: 0 6px 15px rgba(0,0,0,0.4);
+      transition: transform 0.3s ease;
     }
-    @keyframes fadeInUp {
-      from { transform: translateY(20px); opacity: 0; }
-      to { transform: translateY(0); opacity: 1; }
+    .gallery a:hover img, .gallery a:focus img {
+      transform: scale(1.05);
+      border-color: #ffdd57;
+      box-shadow: 0 8px 25px rgba(255, 193, 7, 0.8);
+      outline: none;
     }
-    .countdown {
-      font-size: 2.5em;
-      font-weight: bold;
-      background: rgba(255, 255, 255, 0.1);
-      padding: 20px 40px;
-      border-radius: 10px;
-      backdrop-filter: blur(10px);
-      animation: fadeInUp 2s ease forwards;
+
+    /* Events */
+    .events p { font-size: 1.1rem; margin-bottom: 18px; font-weight: 600; color: #eee; }
+    .events p strong { color: #ffc107; }
+
+    /* Footer */
+    footer {
+      background: rgba(255, 255, 255, 0.07);
+      text-align: center;
+      padding: 22px 20px;
+      font-size: 0.9rem;
+      color: #ccc;
+      backdrop-filter: blur(12px);
+      box-shadow: 0 -2px 10px rgba(0,0,0,0.3);
+      user-select: none;
+    }
+
+    /* Animations */
+    @keyframes fadeInDown { from { transform: translateY(-20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+    @keyframes fadeInUp { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+    @keyframes blink { 0% { opacity: 0.2; transform: scale(0.9); } 100% { opacity: 1; transform: scale(1.2); } }
+
+    /* Responsive */
+    @media (max-width: 600px) {
+      header h1 { font-size: 2.4rem; }
+      header p { font-size: 1rem; }
+      nav a { margin: 0 12px; font-size: 1rem; }
+      section { padding: 30px 20px; margin: 30px 15px 50px; }
+      h2 { font-size: 1.8rem; }
+      .music-gallery { gap: 15px; }
+      .music-gallery a { width: 160px; height: 160px; }
+      .gallery { grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 15px; }
+      .events p { font-size: 1rem; }
     }
   </style>
 </head>
 <body>
-  <h1>We Are Upgrading</h1>
-  <p>Your favorite site is getting better! Hang tight while we finish the update.</p>
-  <div class="system-update">
-    <div class="dot"></div>
-    <div class="dot"></div>
-    <div class="dot"></div>
-  </div>
-  <div class="countdown" id="countdown"></div>
+  <header>
+    <h1>Arie Savvy</h1>
+    <p>Soulful · Deep-House Music</p>
+  </header>
 
-  <script>
-    // Countdown from 10 days
-    const targetDate = new Date();
-    targetDate.setDate(targetDate.getDate() + 10);
+  <nav>
+    <a href="#about" aria-label="About Arie Savvy">About</a>
+    <a href="#music" aria-label="Music by Arie Savvy">Music</a>
+    <a href="#gallery" aria-label="Gallery of Arie Savvy">Gallery</a>
+    <a href="#events" aria-label="Upcoming Events">Events</a>
+  </nav>
 
-    function updateCountdown() {
-      const now = new Date();
-      const timeDiff = targetDate - now;
+  <main>
+    <section id="about" tabindex="0">
+      <h2>About</h2>
+      <p>Arie Savvy, whose real name is Kabelo Selomo, was born on August 10, 2001, in Botha-Bothe, Lesotho. He is a soulful deep house producer and pop artist blending African rhythm with modern house grooves. Arie began his music career in 2021, producing deep house and recording music that takes listeners on a journey of emotion, culture, and creativity.</p>
+      <p>He is currently in an exclusive relationship with Pontsho Motsoasele since September 4, 2024.</p>
+      <div class="dot-animation" aria-hidden="true">
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+      </div>
+    </section>
 
-      const days = Math.max(0, Math.floor(timeDiff / (1000 * 60 * 60 * 24)));
-      const hours = Math.floor((timeDiff / (1000 * 60 * 60)) % 24);
-      const minutes = Math.floor((timeDiff / (1000 * 60)) % 60);
-      const seconds = Math.floor((timeDiff / 1000) % 60);
+    <section id="music" tabindex="0">
+      <h2>Music</h2>
+      <p>click your favorite streaming platform:</p>
+      <div class="music-gallery">
+        <a href="https://open.spotify.com/track/..." target="_blank" rel="noopener" aria-label="Track 1">
+          <img src="Spotify.png" alt="Track 1 Cover"/>
+        </a>
+        <a href="https://open.spotify.com/track/..." target="_blank" rel="noopener" aria-label="Track 2">
+          <img src="youtube.png" alt="Track 2 Cover"/>
+        </a>
+        <a href="https://open.spotify.com/track/..." target="_blank" rel="noopener" aria-label="Track 3">
+          <img src="soundcloud.png " alt="Track 3 Cover" width="10px" height="10px"/>
+        </a>
+      </div>
+    </section>
 
-      document.getElementById("countdown").textContent = `${days}d ${hours}h ${minutes}m ${seconds}s`;
-    }
+    <section id="gallery" tabindex="0">
+      <h2>Gallery</h2>
+      <div class="gallery">
+        <a href="picture3.WEBP" target="_blank" rel="noopener" aria-label="View full image: Studio Session">
+          <img src="picture5.jpg" alt="Studio Session"/>
+        </a>
+        <a href="link-to-gallery2-full.jpg" target="_blank" rel="noopener" aria-label="View full image: Live Performance">
+          <img src="picture3.webp" alt="Live Performance" loading="lazy" />
+        </a>
+        <a href="link-to-gallery3-full.jpg" target="_blank" rel="noopener" aria-label="View full image: Behind the Scenes">
+          <img src="picture4.jpg" alt="Behind the Scenes" loading="lazy" />
+        </a>
+      </div>
+    </section>
 
-    setInterval(updateCountdown, 1000);
-    updateCountdown();
-  </script>
+    <section id="events" tabindex="0">
+      <h2>Events</h2>
+      <div class="events">
+        <p><strong>No Events to show</strong></p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    &copy; 2025 Arie Savvy. All rights reserved.
+  </footer>
 </body>
 </html>
