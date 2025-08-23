@@ -7,146 +7,147 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
   <style>
     /* Reset & base */
-    * { box-sizing: border-box; }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
-      margin: 0;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
-      color: #fff;
-      overflow-x: hidden;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #0d0d0d, #1c1c1c, #2a2a2a);
+      color: #f0f0f0;
       line-height: 1.6;
+      overflow-x: hidden;
     }
-    a { color: inherit; text-decoration: none; }
-    a:focus, a:hover { outline: none; color: #ffc107; }
+    a { text-decoration: none; color: inherit; }
+    a:focus, a:hover { outline: none; }
 
     /* Header */
-    header { text-align: center; padding: 80px 20px 40px; animation: fadeInDown 1s ease forwards; }
-    header h1 { font-size: 3.5rem; margin: 0; letter-spacing: 4px; text-transform: uppercase; font-weight: 700; }
-    header p { margin-top: 12px; font-size: 1.3rem; font-weight: 400; color: #ccc; letter-spacing: 1.5px; }
+    header {
+      text-align: center;
+      padding: 80px 20px 40px;
+      animation: fadeInDown 1s ease forwards;
+    }
+    header h1 {
+      font-size: 3rem;
+      margin: 0;
+      color: #f9c80e;
+      font-weight: 800;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+    }
+    header p {
+      margin-top: 10px;
+      font-size: 1.2rem;
+      color: #aaa;
+      font-style: italic;
+    }
 
     /* Navigation */
     nav {
       display: flex;
       justify-content: center;
-      background-color: rgba(255, 255, 255, 0.07);
-      padding: 12px 0;
+      background: rgba(255, 255, 255, 0.05);
+      padding: 12px 20px;
       position: sticky;
       top: 0;
-      backdrop-filter: blur(12px);
+      backdrop-filter: blur(10px);
       z-index: 1000;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+      border-bottom: 1px solid rgba(255,255,255,0.1);
     }
     nav a {
-      margin: 0 20px;
+      margin: 0 15px;
       font-weight: 600;
-      font-size: 1.1rem;
+      font-size: 1.05rem;
+      color: #f0f0f0;
       transition: color 0.3s ease;
       position: relative;
-      padding: 4px 0;
+      padding: 6px 0;
     }
     nav a::after {
       content: '';
       position: absolute;
-      bottom: -6px;
+      bottom: -4px;
       left: 0;
       width: 0%;
       height: 2px;
-      background: #ffc107;
+      background: #f9c80e;
       transition: width 0.3s ease;
     }
     nav a:hover::after, nav a:focus::after { width: 100%; }
-    nav a:hover, nav a:focus { color: #ffc107; }
+    nav a:hover, nav a:focus { color: #f9c80e; }
 
     /* Section */
     section {
       max-width: 960px;
-      background-color: rgba(255, 255, 255, 0.07);
+      background: rgba(255, 255, 255, 0.05);
       margin: 40px auto 60px;
       padding: 40px 30px;
-      border-radius: 18px;
-      backdrop-filter: blur(15px);
-      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+      border-radius: 20px;
+      box-shadow: 0 6px 25px rgba(0, 0, 0, 0.4);
       animation: fadeInUp 1.2s ease forwards;
     }
     h2 {
-      font-size: 2.4rem;
+      font-size: 2.2rem;
       margin-bottom: 24px;
-      color: #ffc107;
-      border-bottom: 3px solid #ffc107;
-      padding-bottom: 10px;
+      color: #f9c80e;
+      border-bottom: 2px solid #f9c80e;
+      padding-bottom: 8px;
       font-weight: 700;
     }
-    p { font-size: 1.15rem; margin-bottom: 1.2em; color: #eee; }
+    p { font-size: 1.1rem; margin-bottom: 1.2em; color: #ddd; }
 
     /* Dot animation */
     .dot-animation { display: flex; justify-content: center; margin-top: 25px; }
-    .dot { width: 14px; height: 14px; border-radius: 50%; background-color: #ffc107; margin: 0 6px; animation: blink 1.5s infinite alternate; }
+    .dot {
+      width: 12px; height: 12px;
+      border-radius: 50%;
+      background-color: #f9c80e;
+      margin: 0 5px;
+      animation: blink 1.5s infinite alternate;
+    }
     .dot:nth-child(2) { animation-delay: 0.3s; }
     .dot:nth-child(3) { animation-delay: 0.6s; }
 
-    /* Music Gallery */
-    .music-gallery {
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 30px;
+    /* Music Section */
+    .music-players {
+      display: grid;
+      gap: 25px;
       margin-top: 20px;
     }
-    .music-gallery a {
-      display: block;
-      width: 220px;
-      height: 220px;
-      overflow: hidden;
-      border-radius: 18px;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.5);
-      transition: transform 0.4s ease, box-shadow 0.4s ease;
-    }
-    .music-gallery a img {
+    .music-players iframe {
       width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-    }
-    .music-gallery a:hover img, .music-gallery a:focus img {
-      transform: scale(1.08);
-      box-shadow: 0 12px 30px rgba(255, 193, 7, 0.8);
+      border: none;
+      border-radius: 12px;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.6);
     }
 
     /* Gallery */
     .gallery {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 25px;
+      gap: 20px;
     }
     .gallery img {
       width: 100%;
-      height: auto;
-      border-radius: 14px;
+      border-radius: 16px;
       object-fit: cover;
       box-shadow: 0 6px 15px rgba(0,0,0,0.4);
       transition: transform 0.3s ease;
     }
-    .gallery a:hover img, .gallery a:focus img {
+    .gallery a:hover img {
       transform: scale(1.05);
-      border-color: #ffdd57;
-      box-shadow: 0 8px 25px rgba(255, 193, 7, 0.8);
-      outline: none;
+      box-shadow: 0 8px 25px rgba(249, 200, 14, 0.6);
     }
 
     /* Events */
-    .events p { font-size: 1.1rem; margin-bottom: 18px; font-weight: 600; color: #eee; }
-    .events p strong { color: #ffc107; }
+    .events p { font-size: 1.05rem; margin-bottom: 18px; font-weight: 600; color: #ccc; }
+    .events p strong { color: #f9c80e; }
 
     /* Footer */
     footer {
-      background: rgba(255, 255, 255, 0.07);
+      background: rgba(255, 255, 255, 0.05);
       text-align: center;
       padding: 22px 20px;
       font-size: 0.9rem;
-      color: #ccc;
-      backdrop-filter: blur(12px);
-      box-shadow: 0 -2px 10px rgba(0,0,0,0.3);
-      user-select: none;
+      color: #aaa;
+      border-top: 1px solid rgba(255,255,255,0.1);
     }
 
     /* Animations */
@@ -156,15 +157,12 @@
 
     /* Responsive */
     @media (max-width: 600px) {
-      header h1 { font-size: 2.4rem; }
-      header p { font-size: 1rem; }
-      nav a { margin: 0 12px; font-size: 1rem; }
-      section { padding: 30px 20px; margin: 30px 15px 50px; }
-      h2 { font-size: 1.8rem; }
-      .music-gallery { gap: 15px; }
-      .music-gallery a { width: 160px; height: 160px; }
+      header h1 { font-size: 2.2rem; }
+      nav a { margin: 0 10px; font-size: 0.95rem; }
+      section { padding: 25px 18px; margin: 25px 15px 40px; }
+      h2 { font-size: 1.6rem; }
+      .music-players iframe { height: 180px; }
       .gallery { grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 15px; }
-      .events p { font-size: 1rem; }
     }
   </style>
 </head>
@@ -175,56 +173,56 @@
   </header>
 
   <nav>
-    <a href="#about" aria-label="About Arie Savvy">About</a>
-    <a href="#music" aria-label="Music by Arie Savvy">Music</a>
-    <a href="#gallery" aria-label="Gallery of Arie Savvy">Gallery</a>
-    <a href="#events" aria-label="Upcoming Events">Events</a>
+    <a href="#about">About</a>
+    <a href="#music">Music</a>
+    <a href="#gallery">Gallery</a>
+    <a href="#events">Events</a>
   </nav>
 
   <main>
-    <section id="about" tabindex="0">
+    <section id="about">
       <h2>About</h2>
-      <p>Arie Savvy, whose real name is Kabelo Selomo, was born on August 10, 2001, in Botha-Bothe, Lesotho. He is a soulful deep house producer and pop artist blending African rhythm with modern house grooves. Arie began his music career in 2021, producing deep house and recording music that takes listeners on a journey of emotion, culture, and creativity.</p>
-      <p>He is currently in an exclusive relationship with Pontsho Motsoasele since September 4, 2024.</p>
+      <p>Arie Savvy, born <strong>Kabelo Selomo</strong> on August 10, 2001, in Botha-Bothe, Lesotho, is a soulful deep house producer and pop artist blending African rhythm with modern house grooves.</p>
+      <p>He began his career in 2021, creating music that takes listeners on a journey of emotion, culture, and creativity.</p>
+      <p>Arie is currently in an exclusive relationship with <strong>Pontsho Motsoasele</strong> since September 4, 2024.</p>
       <div class="dot-animation" aria-hidden="true">
-        <div class="dot"></div>
-        <div class="dot"></div>
-        <div class="dot"></div>
+        <div class="dot"></div><div class="dot"></div><div class="dot"></div>
       </div>
     </section>
 
-    <section id="music" tabindex="0">
+    <section id="music">
       <h2>Music</h2>
-      <p>click your favorite streaming platform:</p>
-      <div class="music-gallery">
-        <a href="https://open.spotify.com/track/..." target="_blank" rel="noopener" aria-label="Track 1">
-          <img src="Spotify.png" alt="Track 1 Cover"/>
-        </a>
-        <a href="https://open.spotify.com/track/..." target="_blank" rel="noopener" aria-label="Track 2">
-          <img src="youtube.png" alt="Track 2 Cover"/>
-        </a>
-        <a href="https://open.spotify.com/track/..." target="_blank" rel="noopener" aria-label="Track 3">
-          <img src="soundcloud.png " alt="Track 3 Cover" width="10px" height="10px"/>
-        </a>
+      <p>Stream Arie’s music right here:</p>
+      <div class="music-players">
+        <!-- Spotify Embed -->
+        <iframe style="border-radius:12px" src="https://open.spotify.com/embed/artist/4mHcIfjakxm4IOcK2gTPVJ?utm_source=generator" height="380" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+
+        <!-- SoundCloud Embed -->
+            <iframe scrolling="no" frameborder="no" allow="autoplay" 
+             src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/user-277315240-140049075/my-girl-mp3%3Fsi%3D11f9feae8ffb41aa9ea60459e94aa696&utm_source=clipboard&utm_medium=text&utm_campaign=social_sharing&color=%23ff4081&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true">
+          </iframe>
+
+        <!-- YouTube Embed -->
+         <iframe src="https://www.youtube.com/embed/O6sSZP5ubNE?si=kmbJLpdSl6lKLgsq" allowfullscreen></iframe>
       </div>
     </section>
 
-    <section id="gallery" tabindex="0">
+    <section id="gallery">
       <h2>Gallery</h2>
       <div class="gallery">
-        <a href="picture3.WEBP" target="_blank" rel="noopener" aria-label="View full image: Studio Session">
-          <img src="picture5.jpg" alt="Studio Session"/>
+        <a href="picture3.webp" target="_blank">
+          <img src="picture5.jpg" alt="Studio Session" />
         </a>
-        <a href="link-to-gallery2-full.jpg" target="_blank" rel="noopener" aria-label="View full image: Live Performance">
+        <a href="picture3.webp" target="_blank">
           <img src="picture3.webp" alt="Live Performance" loading="lazy" />
         </a>
-        <a href="link-to-gallery3-full.jpg" target="_blank" rel="noopener" aria-label="View full image: Behind the Scenes">
+        <a href="picture4.jpg" target="_blank">
           <img src="picture4.jpg" alt="Behind the Scenes" loading="lazy" />
         </a>
       </div>
     </section>
 
-    <section id="events" tabindex="0">
+    <section id="events">
       <h2>Events</h2>
       <div class="events">
         <p><strong>No Events to show</strong></p>
@@ -237,3 +235,5 @@
   </footer>
 </body>
 </html>
+
+
