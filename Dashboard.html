@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dashboard - Arie Savvy</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <style>
+        body {
+            background-color: #121212;
+            color: #ffffff;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .header nav {
+            background-color: #1f1f1f;
+            padding: 15px 50px;
+            display: flex;
+            align-items: center;
+        }
+
+        .header .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #ffcc00;
+        }
+
+        .dashboard-section {
+            max-width: 900px;
+            margin: 50px auto;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .dashboard-section h1, .dashboard-section h2 {
+            color: #ffcc00;
+            margin-bottom: 20px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        form input {
+            padding: 10px;
+            font-size: 1rem;
+            border-radius: 8px;
+            border: none;
+        }
+
+        form .cta-button {
+            padding: 12px 25px;
+            background-color: #ffcc00;
+            color: #121212;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        form .cta-button:hover {
+            background-color: #e6b800;
+            transform: scale(1.05);
+        }
+
+        .gallery-grid, .music-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .gallery-img {
+            width: 100%;
+            border-radius: 8px;
+            border: 2px solid #ffcc00;
+        }
+
+        iframe.music-embed {
+            width: 100%;
+            height: 215px;
+            border-radius: 8px;
+            border: 2px solid #ffcc00;
+        }
+
+        #feedbackMessage {
+            margin-top: 10px;
+            font-weight: bold;
+        }
+
+        .footer {
+            background-color: #1f1f1f;
+            text-align: center;
+            padding: 20px 0;
+            margin-top: 50px;
+            font-size: 0.9rem;
+            color: #888888;
+        }
+    </style>
+</head>
+<body>
+    <section class="header">
+        <nav>
+            <section class="logo">Arie Savvy</section>
+        </nav>
+    </section>
+
+    <section class="dashboard-section">
+        <h1>Gallery Dashboard</h1>
+
+        <!-- Image Form -->
+        <form id="addImageForm">
+            <label for="imageUrl">Image URL:</label>
+            <input type="url" id="imageUrl" placeholder="Enter image URL" required>
+            <button type="submit" class="cta-button">Add to Gallery</button>
+        </form>
+
+        <!-- YouTube Form -->
+        <form id="addYoutubeForm">
+            <label for="youtubeUrl">YouTube Link:</label>
+            <input type="url" id="youtubeUrl" placeholder="Enter YouTube video URL" required>
+            <button type="submit" class="cta-button">Add to Music Collection</button>
+        </form>
+
+        <!-- Feedback -->
+        <div id="feedbackMessage"></div>
+
+        <h2>Existing Images</h2>
+        <div id="galleryList" class="gallery-grid"></div>
+
+        <h2>Existing YouTube Links</h2>
+        <div id="musicList" class="music-grid"></div>
+    </section>
+
+    <section class="footer">
+        <p>&copy; 2025 Arie Savvy. All rights reserved.</p>
+    </section>
+
+    <!-- Firebase SDKs -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore-compat.js"></script>
+
+    <script>
+        // Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyCiaF7ZSZxTCL_za67XmOzSqdL0WrCGLVk",
+            authDomain: "ariesavvy.firebaseapp.com",
+            projectId: "ariesavvy",
+            storageBucket: "ariesavvy.firebasestorage.app",
+            messagingSenderId: "982950111913",
+            appId: "1:982950111913:web:a78bcd881b69ed5c8ad7b8",
+            measurementId: "G-W5WBCK8NFC"
+        };
+
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.firestore();
+
+        const addImageForm = document.getElementById('addImageForm');
+        const addYoutubeForm = document.getElementById('addYoutubeForm');
+        const galleryList = document.getElementById('galleryList');
+        const musicList = document.getElementById('musicList');
+        const feedbackMessage = document.getElementById('feedbackMessage');
+
+        // Load gallery images
+        function loadGallery() {
+            galleryList.innerHTML = "";
+            db.collection("gallery").get().then(snapshot => {
+                if (snapshot.empty) {
+                    feedbackMessage.textContent = "No images in the gallery yet.";
+                    feedbackMessage.style.color = "#ffffff";
+                } else {
+                    snapshot.forEach(doc => {
+                        const data = doc.data();
+                        if (data.imageUrl) {
+                            const img = document.createElement("img");
+                            img.src = data.imageUrl;
+                            img.classList.add("gallery-img");
+                            galleryList.appendChild(img);
+                        }
+                    });
+                    feedbackMessage.textContent = "";
+                }
+            });
+        }
+
+        // Load music (YouTube)
+        function loadMusic() {
+            musicList.innerHTML = "";
+            db.collection("music").get().then(snapshot => {
+                if (snapshot.empty) {
+                    feedbackMessage.textContent = "No music added yet.";
+                    feedbackMessage.style.color = "#ffffff";
+                } else {
+                    snapshot.forEach(doc => {
+                        const data = doc.data();
+                        if (data.youtubeLink) {
+                            let videoId = data.youtubeLink.split("v=")[1];
+                            if (!videoId) videoId = data.youtubeLink; // fallback
+                            const ampersandPosition = videoId.indexOf("&");
+                            if(ampersandPosition !== -1) videoId = videoId.substring(0, ampersandPosition);
+
+                            const iframe = document.createElement("iframe");
+                            iframe.src = `https://www.youtube.com/embed/${videoId}`;
+                            iframe.classList.add("music-embed");
+                            iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
+                            iframe.allowFullscreen = true;
+                            musicList.appendChild(iframe);
+                        }
+                    });
+                    feedbackMessage.textContent = "";
+                }
+            });
+        }
+
+        // Image form submit
+        addImageForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const imageUrl = document.getElementById('imageUrl').value.trim();
+            if (!imageUrl) return;
+
+            db.collection("gallery").add({ imageUrl })
+            .then(() => {
+                feedbackMessage.textContent = "✅ Image added successfully!";
+                feedbackMessage.style.color = "#ffcc00";
+                addImageForm.reset();
+                loadGallery();
+            }).catch(error => {
+                feedbackMessage.textContent = "❌ Failed to add image.";
+                feedbackMessage.style.color = "red";
+            });
+        });
+
+        // YouTube form submit
+        addYoutubeForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const youtubeLink = document.getElementById('youtubeUrl').value.trim();
+            if (!youtubeLink) return;
+
+            db.collection("music").add({ youtubeLink })
+            .then(() => {
+                feedbackMessage.textContent = "✅ YouTube link added successfully!";
+                feedbackMessage.style.color = "#ffcc00";
+                addYoutubeForm.reset();
+                loadMusic();
+            }).catch(error => {
+                feedbackMessage.textContent = "❌ Failed to add YouTube link.";
+                feedbackMessage.style.color = "red";
+            });
+        });
+
+        // Initial load
+        loadGallery();
+        loadMusic();
+    </script>
+</body>
+</html>
+
