@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Login - Arie Savvy</title>
+<link rel="stylesheet" href="style.css">
+<style>
+    body {
+        background: linear-gradient(to bottom, #5a33dc, #121212);
+        font-family: Arial, sans-serif;
+        margin: 0;
+        color: #fff;
+    }
+
+    /* Nav styles */
+    .header {
+        background-color: #1f1f1f;
+        padding: 15px 50px;
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.5);
+        border-bottom: 1px solid #333;
+    }
+    nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        position: relative;
+    }
+    nav .logo {
+        font-size: 1.8rem;
+        font-weight: bold;
+        color: #ffcc00;
+    }
+    nav ul.nav-list {
+        list-style: none;
+        display: flex;
+        gap: 25px;
+    }
+    nav ul.nav-list li a {
+        text-decoration: none;
+        color: #ffffff;
+        font-weight: 500;
+        transition: all 0.3s ease;
+    }
+    nav ul.nav-list li a:hover {
+        color: #ffcc00;
+    }
+
+    /* Mobile menu toggle */
+    .menu-toggle {
+        display: none;
+        flex-direction: column;
+        cursor: pointer;
+        gap: 5px;
+    }
+    .menu-toggle .bar {
+        width: 25px;
+        height: 3px;
+        background-color: #ffcc00;
+        border-radius: 2px;
+    }
+
+    @media (max-width: 768px) {
+        nav ul.nav-list {
+            display: none;
+            flex-direction: column;
+            position: absolute;
+            top: 60px;
+            right: 50px;
+            background-color: #1f1f1f;
+            padding: 20px;
+            border-radius: 8px;
+        }
+        nav ul.nav-list.active {
+            display: flex;
+        }
+        .menu-toggle {
+            display: flex;
+        }
+    }
+
+    /* Login container */
+    .login-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        min-height: calc(100vh - 80px);
+        text-align: center;
+        padding: 20px;
+    }
+    .login-box {
+        background-color: #1f1f1f;
+        padding: 40px;
+        border-radius: 12px;
+        border: 2px solid #ffcc00;
+        width: 300px;
+    }
+    .login-box h1 {
+        color: #ffcc00;
+        margin-bottom: 30px;
+    }
+    .login-box input {
+        width: 100%;
+        padding: 12px;
+        margin-bottom: 20px;
+        border-radius: 8px;
+        border: none;
+    }
+    .login-box button {
+        width: 100%;
+        padding: 12px;
+        background-color: #ffcc00;
+        color: #121212;
+        font-weight: bold;
+        border: none;
+        border-radius: 50px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+    .login-box button:hover {
+        background-color: #e6b800;
+        transform: scale(1.05);
+    }
+    #loginMessage {
+        margin-top: 15px;
+        font-weight: bold;
+    }
+</style>
+</head>
+<body>
+
+<!-- Nav -->
+<section class="header">
+    <nav>
+        <section class="logo">Arie Savvy</section>
+
+        <!-- Mobile menu toggle -->
+        <div class="menu-toggle" id="mobile-menu">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </div>
+
+        <ul class="nav-list">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="About.html">About</a></li>
+            <li><a href="gallery.html">Gallery</a></li>
+            <li><a href="music.html">Music</a></li>
+        </ul>
+    </nav>
+</section>
+
+<!-- Login form -->
+<div class="login-container">
+    <div class="login-box">
+        <h1>Admin Login</h1>
+        <input type="email" id="email" placeholder="Email" required>
+        <input type="password" id="password" placeholder="Password" required>
+        <button id="loginButton">Login</button>
+        <div id="loginMessage"></div>
+    </div>
+</div>
+
+<!-- Firebase SDK -->
+<script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-auth-compat.js"></script>
+
+<script>
+    // Firebase config
+    const firebaseConfig = {
+        apiKey: "AIzaSyCiaF7ZSZxTCL_za67XmOzSqdL0WrCGLVk",
+        authDomain: "ariesavvy.firebaseapp.com",
+        projectId: "ariesavvy",
+        storageBucket: "ariesavvy.firebasestorage.app",
+        messagingSenderId: "982950111913",
+        appId: "1:982950111913:web:a78bcd881b69ed5c8ad7b8",
+        measurementId: "G-W5WBCK8NFC"
+    };
+    firebase.initializeApp(firebaseConfig);
+    const auth = firebase.auth();
+
+    const loginButton = document.getElementById('loginButton');
+    const loginMessage = document.getElementById('loginMessage');
+
+    loginButton.addEventListener('click', () => {
+        const email = document.getElementById('email').value.trim();
+        const password = document.getElementById('password').value.trim();
+
+        if (!email || !password) {
+            loginMessage.textContent = "Please enter email and password.";
+            loginMessage.style.color = "red";
+            return;
+        }
+
+        auth.signInWithEmailAndPassword(email, password)
+            .then(userCredential => {
+                window.location.href = "dashboard.html";
+            })
+            .catch(error => {
+                loginMessage.textContent = "❌ " + error.message;
+                loginMessage.style.color = "red";
+            });
+    });
+
+    auth.onAuthStateChanged(user => {
+        if (user) window.location.href = "dashboard.html";
+    });
+
+    // Mobile menu toggle
+    const mobileMenu = document.getElementById('mobile-menu');
+    const navList = document.querySelector('.nav-list');
+    mobileMenu.addEventListener('click', () => {
+        navList.classList.toggle('active');
+    });
+</script>
+
+</body>
+</html>
+
