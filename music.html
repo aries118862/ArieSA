@@ -86,16 +86,20 @@
                                 videoId = data.youtubeLink;
                             }
 
-                            // Create iframe
-                            const iframe = document.createElement("iframe");
-                            iframe.src = `https://www.youtube.com/embed/${videoId}`;
-                            iframe.width = "360";
-                            iframe.height = "215";
-                            iframe.frameBorder = "0";
-                            iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
-                            iframe.allowFullscreen = true;
-                            iframe.classList.add("music-embed");
-                            musicGrid.appendChild(iframe);
+                         // Create responsive iframe wrapper
+const container = document.createElement("div");
+container.classList.add("iframe-container");
+
+const iframe = document.createElement("iframe");
+iframe.src = `https://www.youtube.com/embed/${videoId}`;
+iframe.frameBorder = "0";
+iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
+iframe.allowFullscreen = true;
+iframe.classList.add("music-embed");
+
+container.appendChild(iframe);
+musicGrid.appendChild(container);
+   
                         }
                     });
                 }
