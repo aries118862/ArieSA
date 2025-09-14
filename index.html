@@ -1,6 +1,8 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home page</title>
     <link rel="stylesheet" type="text/css" href="style.css">
 </head>
@@ -9,6 +11,7 @@
         <nav>
             <section class="logo">Arie Savvy</section>
 
+            <!-- Hamburger menu -->
             <div class="menu-toggle" id="mobile-menu">
                 <span class="bar"></span>
                 <span class="bar"></span>
@@ -41,7 +44,16 @@
         <p>&copy; 2023 Arie Savvy. All rights reserved.</p>
     </section>
 
-    <!-- Link external JS at the end of body -->
-    <script src="script.js"></script>
+    <!-- Mobile Menu Script -->
+    <script>
+        const mobileMenu = document.getElementById("mobile-menu");
+        const navList = document.querySelector(".nav-list");
+
+        mobileMenu.addEventListener("click", () => {
+            navList.classList.toggle("active");
+            mobileMenu.classList.toggle("active");
+        });
+    </script>
 </body>
 </html>
+
