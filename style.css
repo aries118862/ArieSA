@@ -214,7 +214,7 @@ nav ul.nav-list li a:hover {
 .gallery-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-    gap: 5px; /* closer images */
+    gap: 30px; /* closer images */
     justify-content: center;
     align-items: start;
 }

@@ -7,16 +7,15 @@
     <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
+    <!-- Header -->
     <section class="header">
         <nav>
             <section class="logo">Arie Savvy</section>
-
             <div class="menu-toggle" id="mobile-menu">
                 <span class="bar"></span>
                 <span class="bar"></span>
                 <span class="bar"></span>
             </div>
-
             <ul class="nav-list">
                 <li><a href="index.html">Home</a></li>
                 <li><a href="About.html">About</a></li>
@@ -26,6 +25,7 @@
         </nav>
     </section>
 
+    <!-- Gallery Section -->
     <section class="gallery-section">
         <h1>Gallery</h1>
         <div class="gallery-grid" id="gallery-grid">
@@ -33,6 +33,7 @@
         </div>
     </section>
 
+    <!-- Footer -->
     <section class="footer">
         <p>&copy; 2025 Arie Savvy. All rights reserved.</p>
     </section>
@@ -42,6 +43,7 @@
     <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore-compat.js"></script>
 
     <script>
+        // Firebase config
         const firebaseConfig = {
             apiKey: "AIzaSyCiaF7ZSZxTCL_za67XmOzSqdL0WrCGLVk",
             authDomain: "ariesavvy.firebaseapp.com",
@@ -58,6 +60,7 @@
 
         function loadGallery() {
             galleryGrid.innerHTML = "";
+
             db.collection("gallery").get().then(snapshot => {
                 if (snapshot.empty) {
                     const msg = document.createElement("p");
@@ -68,20 +71,27 @@
                     snapshot.forEach((doc, index) => {
                         const data = doc.data();
                         if (data.imageUrl) {
-                            // Wrap image in link for lightbox
+                            // Create unique ID for each lightbox
+                            const lightboxId = `lightbox-${Date.now()}-${index}`;
+
+                            // Create clickable thumbnail
                             const link = document.createElement("a");
-                            link.href = `#lightbox-${index}`;
+                            link.href = `#${lightboxId}`;
                             const img = document.createElement("img");
                             img.src = data.imageUrl;
                             img.classList.add("gallery-img");
                             link.appendChild(img);
                             galleryGrid.appendChild(link);
 
-                            // Lightbox overlay
+                            // Create lightbox overlay
                             const lightbox = document.createElement("div");
-                            lightbox.id = `lightbox-${index}`;
+                            lightbox.id = lightboxId;
                             lightbox.classList.add("lightbox");
-                            lightbox.innerHTML = `<a href="#"><img src="${data.imageUrl}" /></a>`;
+                            lightbox.innerHTML = `
+                                <a href="#" class="close-lightbox">
+                                    <img src="${data.imageUrl}" />
+                                </a>
+                            `;
                             document.body.appendChild(lightbox);
                         }
                     });
@@ -102,10 +112,11 @@
         const navList = document.querySelector('.nav-list');
         mobileMenu.addEventListener('click', () => {
             navList.classList.toggle('active');
-            mobileMenu.classList.toggle('active'); // adds visual toggle
+            mobileMenu.classList.toggle('active'); // toggle visual bars
         });
     </script>
 </body>
 </html>
+
 
 
