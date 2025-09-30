@@ -3,120 +3,47 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gallery - Arie Savvy</title>
-    <link rel="stylesheet" type="text/css" href="style.css">
+    <title>California in Pictures</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
 </head>
 <body>
-    <!-- Header -->
-    <section class="header">
-        <nav>
-            <section class="logo">Arie Savvy</section>
-            <div class="menu-toggle" id="mobile-menu">
-                <span class="bar"></span>
-                <span class="bar"></span>
-                <span class="bar"></span>
-            </div>
-            <ul class="nav-list">
-                <li><a href="index.html">Home</a></li>
-                <li><a href="About.html">About</a></li>
-                <li><a href="gallery.html">Gallery</a></li>
-                <li><a href="music.html">Music</a></li>
-            </ul>
-        </nav>
-    </section>
+    <!-- Navigation Bar -->
+      <nav>
+        <div class="logo">California</div>
+        <div class="menu-icon" id="menu-icon">&#9776;</div>
+          <ul id="nav-links">
+             <li><a href="index.html" >Home</a></li>
+            <li><a href="about.html">About</a></li>
+             <li><a href="gallery.html" class="active">Gallery</a></li>
+            <li><a href="weather.html">Weather</a></li>
+          </ul>
+      </nav>
 
-    <!-- Gallery Section -->
-    <section class="gallery-section">
-        <h1>Gallery</h1>
-        <div class="gallery-grid" id="gallery-grid">
-            <!-- Images from Firestore will appear here -->
-        </div>
-    </section>
+    <h1 style="text-align:center; margin-top:40px; font-family:'Playfair Display', serif; color: white;">California Pictures</h1>
+
+    <div style="text-align:center; margin-bottom:20px;">
+        <button class="filter-btn" data-category="all">Show All</button>
+        <button class="filter-btn" data-category="beach">Beaches</button>
+        <button class="filter-btn" data-category="mountain">Mountains</button>
+        <button class="filter-btn" data-category="city">City</button>
+    </div>
+
+    <!-- Gallery Grid -->
+    <div class="gallery-container" id="gallery"></div>
+
+    <!-- Lightbox -->
+    <div class="lightbox" id="lightbox">
+        <span onclick="closeLightbox()">&times;</span>
+        <img id="lightbox-img" src="">
+    </div>
 
     <!-- Footer -->
-    <section class="footer">
-        <p>&copy; 2025 Arie Savvy. All rights reserved.</p>
-    </section>
-
-    <!-- Firebase SDKs -->
-    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore-compat.js"></script>
-
-    <script>
-        // Firebase config
-        const firebaseConfig = {
-            apiKey: "AIzaSyCiaF7ZSZxTCL_za67XmOzSqdL0WrCGLVk",
-            authDomain: "ariesavvy.firebaseapp.com",
-            projectId: "ariesavvy",
-            storageBucket: "ariesavvy.firebasestorage.app",
-            messagingSenderId: "982950111913",
-            appId: "1:982950111913:web:a78bcd881b69ed5c8ad7b8",
-            measurementId: "G-W5WBCK8NFC"
-        };
-
-        firebase.initializeApp(firebaseConfig);
-        const db = firebase.firestore();
-        const galleryGrid = document.getElementById('gallery-grid');
-
-        function loadGallery() {
-            galleryGrid.innerHTML = "";
-
-            db.collection("gallery").get().then(snapshot => {
-                if (snapshot.empty) {
-                    const msg = document.createElement("p");
-                    msg.textContent = "No images found in the gallery.";
-                    msg.style.color = "#ffffff";
-                    galleryGrid.appendChild(msg);
-                } else {
-                    snapshot.forEach((doc, index) => {
-                        const data = doc.data();
-                        if (data.imageUrl) {
-                            // Create unique ID for each lightbox
-                            const lightboxId = `lightbox-${Date.now()}-${index}`;
-
-                            // Create clickable thumbnail
-                            const link = document.createElement("a");
-                            link.href = `#${lightboxId}`;
-                            const img = document.createElement("img");
-                            img.src = data.imageUrl;
-                            img.classList.add("gallery-img");
-                            link.appendChild(img);
-                            galleryGrid.appendChild(link);
-
-                            // Create lightbox overlay
-                            const lightbox = document.createElement("div");
-                            lightbox.id = lightboxId;
-                            lightbox.classList.add("lightbox");
-                            lightbox.innerHTML = `
-                                <a href="#" class="close-lightbox">
-                                    <img src="${data.imageUrl}" />
-                                </a>
-                            `;
-                            document.body.appendChild(lightbox);
-                        }
-                    });
-                }
-            }).catch(error => {
-                console.error("Error fetching gallery:", error);
-                const msg = document.createElement("p");
-                msg.textContent = "❌ Failed to load gallery. Check Firebase rules.";
-                msg.style.color = "red";
-                galleryGrid.appendChild(msg);
-            });
-        }
-
-        loadGallery();
-
-        // Mobile menu toggle
-        const mobileMenu = document.getElementById('mobile-menu');
-        const navList = document.querySelector('.nav-list');
-        mobileMenu.addEventListener('click', () => {
-            navList.classList.toggle('active');
-            mobileMenu.classList.toggle('active'); // toggle visual bars
-        });
-    </script>
+    <footer class="footer">
+        &copy; 2025 California Tourism. All Rights Reserved.
+        <button id="colorBtn" class="btn">Change Background Color</button>
+    </footer>
 </body>
 </html>
-
-
 

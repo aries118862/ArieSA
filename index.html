@@ -1,69 +1,74 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home page</title>
-    <link rel="stylesheet" type="text/css" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Welcome to California!</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <section class="header">
-        <nav>
-            <section class="logo">Arie Savvy</section>
+  <!-- Navigation Bar -->
+       <nav>
+        <div class="logo">California</div>
+        <div class="menu-icon" id="menu-icon">&#9776;</div>
+          <ul id="nav-links">
+             <li><a href="index.html" class="active">Home</a></li>
+            <li><a href="about.html">About</a></li>
+             <li><a href="gallery.html">Gallery</a></li>
+            <li><a href="weather.html">Weather</a></li>
+          </ul>
+      </nav>
 
-            <!-- Hamburger menu -->
-            <div class="menu-toggle" id="mobile-menu">
-                <span class="bar"></span>
-                <span class="bar"></span>
-                <span class="bar"></span>
-                <span class="bar"></span>
-            </div>
+  </nav>
 
-            <ul class="nav-list">
-                <li><a href="index.html">Home</a></li>
-                <li><a href="About.html">About</a></li>
-                <li><a href="gallery.html">Gallery</a></li>
-                <li><a href="music.html">Music</a></li>
-                <li>
-    <a href="admin.html" title="Admin">
-        <!-- Blue profile icon SVG -->
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#2196F3" viewBox="0 0 24 24">
-            <path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z"/>
-        </svg>
-    </a>
-</li>
+  <!-- Hero Section -->
+<section class="hero">
+  <div class="hero-content">
+    <h1 id="welcome-message">Welcome to California!</h1>
+    <p>California, the Golden State, is known for its stunning beaches,
+       vibrant cities, and scenic landscapes. From the towering Redwood 
+       forests to the sparkling Pacific coast, it offers a perfect blend of
+       nature and urban life. Travelers can explore world-famous landmarks,
+       experience rich cultural diversity, and indulge in endless adventures.
+       Whether visiting Hollywood, Napa Valley, or Yosemite, every corner promises 
+       excitement and beauty. Outdoor enthusiasts enjoy hiking, surfing, and skiing 
+       across the state. Art and history lovers find museums and galleries that celebrate
+       creativity. Delicious cuisine, friendly communities, and breathtaking sunsets make 
+       California unforgettable. 
+       <span class="pull-quote">“California is a place where dreams meet reality.”</span>
+    </p>
+    <a href="about.html" class="btn">Learn More</a>
+  </div>
 
-            </ul>
-        </nav>
-    </section>
+  <!-- Hero slideshow arrows -->
+  <a class="hero-prev">&#10094;</a>
+  <a class="hero-next">&#10095;</a>
+</section>
 
-    <section class="hero">
-        <h1>Music That Moves You</h1>
-        <p>
-            Step into the world of Arie Savvy, where every beat tells
-            a story and every rhythm stirs your soul. Explore soulful
-            house and deep house tracks crafted to inspire, energize, 
-            and move you. Stay connected for the latest releases, exclusive mixes,
-            and behind-the-scenes studio moments. Whether you’re relaxing, dancing, 
-            or chasing inspiration, Arie Savvy brings music that truly moves you.
-        </p>
-        <button class="cta-button"><a href="music.html">Listen Now</a></button>
-    </section>
+  <!-- Main Content -->
+  <div class="main-container">
+    <h2 class="main-heading">Explore the Golden State</h2>
+    <p>California’s diversity makes it a must-visit destination.
+      Cities like San Francisco, Los Angeles, and San Diego are 
+      bustling with life, while quieter towns offer charm and relaxation. 
+      The state is home to iconic highways, national parks, and breathtaking
+      landscapes. Seasonal events, festivals, and concerts add to the vibrancy.
+      Travelers can enjoy shopping, dining, and sightseeing tailored to every interest. 
+      Nature enthusiasts can experience lakes, mountains, deserts, and forests all in one state.
+      California’s welcoming atmosphere invites visitors to create unforgettable memories. 
+      Every visit is an opportunity to discover something new and exciting.
+    </p>
 
-    <section class="footer">
-        <p>&copy; 2023 Arie Savvy. All rights reserved.</p>
-    </section>
+  </div>
 
-    <!-- Mobile Menu Script -->
-    <script>
-        const mobileMenu = document.getElementById("mobile-menu");
-        const navList = document.querySelector(".nav-list");
+  <!-- Footer -->
+  <footer class="footer">
+    &copy; 2025 California Tourism. All Rights Reserved.
+    <button id="colorBtn" class="btn">Change Background Color</button>
+  </footer>
 
-        mobileMenu.addEventListener("click", () => {
-            navList.classList.toggle("active");
-            mobileMenu.classList.toggle("active");
-        });
-    </script>
+  <!-- External Script -->
+  <script src="script.js"></script>
 </body>
 </html>
 
